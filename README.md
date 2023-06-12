@@ -1,7 +1,7 @@
   # Text Editor
   
   ## Description 
-  This application is a text editor that runs in the browser. The app will is a single-page application that meets Progressive Web Applications (PWA) criteria. Additionally, it will feature a number of data persistence techniques that serve as redundancy in case one of the options is not supported by the browser. The application will also function offline.
+  This browser-based text editor is a Progressive Web Application (PWA) with multiple data persistence techniques for redundancy. It supports offline functionality to ensure seamless user experience.
   
   ## Table of Contents
   * [Technology Stack](#technology-stack)
