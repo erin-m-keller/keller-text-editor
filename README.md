@@ -76,6 +76,12 @@
   ``` node
     cd keller-text-editor
     npm i
+    cd client
+    npm i
+    cd ..
+    cd server
+    npm i
+    cd ..
   ```
 
   * Start the server in the terminal
