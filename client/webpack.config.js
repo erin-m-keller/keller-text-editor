@@ -59,7 +59,7 @@ module.exports = () => {
             // the sizes of the icon
             sizes: [96, 128, 192, 256, 384, 512],
             // the destination path for the icon
-            destination: path.join('assets', 'icons'),
+            destination: path.join('src', 'images'),
           },
         ],
       }),
