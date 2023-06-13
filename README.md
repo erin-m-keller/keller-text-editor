@@ -74,14 +74,21 @@
 
   * Install the dependencies.
   ``` node
-    cd keller-text-editor && npm i && cd client && npm i && cd .. && cd server && npm i && cd ..
+    npm i
   ```
 
-  * Start the server in the terminal
+  * Build the application.
   ``` node
-    npm start
+    npm run build
   ```
-  > TODO: add next steps here
+
+  * Start the server in the terminal.
+  ``` node
+    npm start 
+    -or- 
+    npm run start:dev
+  ```
+  > Application available at localhost:3000
 
   ## Screenshot
 
