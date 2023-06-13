@@ -7,8 +7,8 @@
     "start:dev": "concurrently \"cd server && npm run server\" \"cd client && npm run dev\"",
     "start": "npm run build && cd server && node server.js",
     "server": "cd server nodemon server.js --ignore client",
-    "build": "webpack",
-    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd client && npm run build",
+    "install": "cd client && npm install",
     "client": "cd client && npm start"
   },
   "keywords": [],
@@ -17,15 +17,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "idb": "^7.1.1",
-    "if-env": "^1.0.4",
-    "webpack": "^5.86.0",
-    "webpack-cli": "^5.1.4",
-    "workbox-window": "^7.0.0"
+    "if-env": "^1.0.4"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "css-loader": "^6.8.1",
-    "nodemon": "^2.0.4",
-    "style-loader": "^3.3.3"
+    "nodemon": "^2.0.4"
   }
 }
