@@ -32,11 +32,11 @@
     }
   ],
   "name": "Just Another Text Editor",
-  "short_name": "JATE",
+  "short_name": "J.A.T.E",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": "/",
-  "description": "PWA Text Editor",
+  "description": "Takes notes with JavaScript syntax highlighting!",
   "background_color": "#6A66A3",
   "theme_color": "#6A66A3"
 }

@@ -40,9 +40,9 @@ module.exports = () => {
         // the name of the PWA
         name: 'Just Another Text Editor',
         // the short name of the PWA
-        short_name: 'JATE',
+        short_name: 'J.A.T.E',
         // the description of the PWA
-        description: 'PWA Text Editor',
+        description: 'Takes notes with JavaScript syntax highlighting!',
         // the background color of the PWA
         background_color: '#6A66A3',
         // the theme color of the PWA
