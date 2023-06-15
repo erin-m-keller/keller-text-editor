@@ -95,5 +95,30 @@ export const getDb = async () => {
   }
 };
 
+/**
+ * @putDb
+ * saves the provided content to 
+ * the 'jate' object store in the 
+ * indexedDB database
+ */
+export const putDb = async (content) => {
+  // try to update the database
+  try {
+    // innitialize the variables
+    const contactDb = await openDB('jate', 1), // create a connection to the database and version
+          tx = contactDb.transaction('jate', 'readwrite'), // create a new transaction and specify readwrite privileges
+          store = tx.objectStore('jate'), // open up the desired object store
+          request = store.put({ content: content }), // use the .put() method on the store and pass in the content
+          result = await request; // get confirmation of the request
+    // log the updated text
+    console.log('🚀 - Updated text saved to the database', result);
+  } 
+  // catch the error
+  catch (error) {
+    // log the error
+    console.error('Error while saving data to the database', error);
+  }
+};
+
 // initialize the database
 initdb();

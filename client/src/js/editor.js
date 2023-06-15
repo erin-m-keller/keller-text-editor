@@ -62,7 +62,7 @@ export default class {
       // log the message
       console.log('The editor has lost focus');
       // save the content to the database
-      // todo: add putDb
+      putDb(localStorage.getItem('content')); 
     });
   }
 }
