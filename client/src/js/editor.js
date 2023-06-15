@@ -36,10 +36,11 @@ export default class {
         // initialize variables
         const mostRecentObject = data[data.length - 1], // get the most recent object
               extractedData = mostRecentObject.content, // extract the content
-              content = this.prependHeader(extractedData);
+              content = this.prependHeader(extractedData),
+              lineNum = content.length - 1; // get the line number
         this.editor.setValue(content); // set the editor value to the content data
         // set the cursor to line 15
-        this.editor.setCursor(14, 0);
+        this.editor.setCursor(lineNum, 0);
       } else {
         // initialize variables
         const content = localData ? this.prependHeader(localData) : header;
