@@ -66,9 +66,9 @@ module.exports = () => {
       // injects a service worker into the output
       new InjectManifest({
         // the path to the service worker source file
-        swSrc: './src-sw.js',
+        swSrc: './sw.js',
         // the destination filename for the injected service worker
-        swDest: 'src-sw.js',
+        swDest: 'sw.js',
       }),
     ],
     // configure the module rules
