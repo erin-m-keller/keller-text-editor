@@ -37,6 +37,8 @@ export default class {
         const mostRecentObject = data[data.length - 1], // get the most recent object
               extractedData = mostRecentObject.content; // extract the content
         this.editor.setValue(extractedData); // set the editor value to the extracted data
+        // set the cursor to line 15
+        this.editor.setCursor(14, 0);
       } else {
         // if no local data
         if (!localData) {
@@ -49,6 +51,8 @@ export default class {
         else {
           // set the value of the editor to the local data
           this.editor.setValue(localData);
+          // set the cursor to line 15
+          this.editor.setCursor(14, 0);
         }
       }
     });
