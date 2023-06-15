@@ -38,7 +38,7 @@ module.exports = () => {
         // inject the manifest into the HTML file
         inject: true,
         // the name of the PWA
-        name: 'Just Another Text Editor',
+        name: 'JavaScript Text Editor',
         // the short name of the PWA
         short_name: 'J.A.T.E',
         // the description of the PWA

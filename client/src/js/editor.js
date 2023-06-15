@@ -4,24 +4,25 @@ import { header } from './header';
 
 export default class {
   constructor() {
+    // initialize variables
     const localData = localStorage.getItem('content');
-
     // check if CodeMirror is loaded
     if (typeof CodeMirror === 'undefined') {
+      // if not loaded, throw error
       throw new Error('CodeMirror is not loaded');
     }
-
     this.editor = CodeMirror(document.querySelector('#main'), {
-      value: ' ', // Set a non-empty default value (a space)
-      mode: 'javascript',
-      theme: 'monokai',
-      lineNumbers: true,
-      lineWrapping: true,
-      autofocus: true,
-      indentUnit: 2,
-      tabSize: 2,
+      value: ' ', // set a non-empty default value (a space)
+      mode: 'javascript', // editor mode is JavaScript
+      theme: 'erlang-dark', // set the editor theme to erlang-dark
+      lineNumbers: true, // enable line numbers
+      lineWrapping: true, // enable line wrapping
+      autofocus: true, // set the editor to autofocus
+      indentUnit: 4, // set the indentation unit to 4 spaces
+      tabSize: 4, // set the tab size to 4 spaces
+      autoCloseBrackets: true, // auto close brackets when typing
+      matchBrackets: true, // highlight matching brackets
     });
-
     /**
      * @getDb
      * retrieves the most recent data from 
@@ -35,44 +36,56 @@ export default class {
       if (data && data.length > 0) {
         // initialize variables
         const mostRecentObject = data[data.length - 1], // get the most recent object
-              extractedData = mostRecentObject.content, // extract the content
-              content = this.prependHeader(extractedData),
-              lineNum = content.length - 1; // get the line number
+          extractedData = mostRecentObject.content; // extract the content
+        const content = this.prependHeader(extractedData); // prepend the header to the extracted data
         this.editor.setValue(content); // set the editor value to the content data
-        // set the cursor to line 15
-        this.editor.setCursor(lineNum, 0);
       } else {
         // initialize variables
-        const content = localData ? this.prependHeader(localData) : header;
-        // set the value of the editor to the content
-        this.editor.setValue(content);
-        // set the cursor to line 15
-        this.editor.setCursor(14, 0);
+        const content = localData ? this.prependHeader(localData) : header; // prepend the header if local data exists
+        this.editor.setValue(content); // set the value of the editor to the content
       }
     });
     // save the content of the editor on change
     this.editor.on('change', () => {
+      // remove the header from the content before saving to localStorage
+      const contentWithoutHeader = this.removeHeader(this.editor.getValue());
       // save the content to localStorage
-      localStorage.setItem('content', this.editor.getValue()); 
+      localStorage.setItem('content', contentWithoutHeader);
     });
     // save the content of the editor on blur
     this.editor.on('blur', () => {
       // log the message
       console.log('The editor has lost focus');
+      // prepend the header to the content before saving to the database
+      const contentWithHeader = this.prependHeader(localStorage.getItem('content'));
       // save the content to the database
-      putDb(localStorage.getItem('content')); 
+      putDb(contentWithHeader);
     });
   }
+  /**
+   * @prependHeader
+   * prepend the header to the data
+  */
   prependHeader(data) {
+    // if data does not start with header
     if (!data.startsWith(header)) {
+      // prepend the header with the data
       return header + '\n' + data;
     }
+    // return the data
     return data;
   }
+  /**
+   * @removeHeader
+   * removes the header from the data
+  */
   removeHeader(data) {
+    // if data starts with header
     if (data.startsWith(header)) {
+      // remove header from the data if already present
       return data.replace(header + '\n', '');
     }
+    // return the data
     return data;
   }
 }
