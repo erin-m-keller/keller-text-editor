@@ -1,5 +1,5 @@
-// Import methods to save and get data from the indexedDB database in './database.js'
-import { getDb, putDb } from './database';
+// import methods to save and get data from the indexedDB database in './database.js'
+import { getDb, putDb } from './database.js';
 import { header } from './header';
 
 export default class {
@@ -12,7 +12,7 @@ export default class {
     }
 
     this.editor = CodeMirror(document.querySelector('#main'), {
-      value: '',
+      value: ' ', // Set a non-empty default value (a space)
       mode: 'javascript',
       theme: 'monokai',
       lineNumbers: true,
@@ -22,21 +22,47 @@ export default class {
       tabSize: 2,
     });
 
-    // When the editor is ready, set the value to whatever is stored in indexeddb.
-    // Fall back to localStorage if nothing is stored in indexeddb, and if neither is available, set the value to header.
+    /**
+     * @getDb
+     * retrieves the most recent data from 
+     * the database and sets the editor value 
+     * accordingly. If no data is found, it 
+     * checks for local data and sets the 
+     * value to either the extracted data 
+     * or the header
+    */
     getDb().then((data) => {
-      console.info('Loaded data from IndexedDB, injecting into editor');
-      this.editor.setValue(data || localData || header);
+      if (data && data.length > 0) {
+        // initialize variables
+        const mostRecentObject = data[data.length - 1], // get the most recent object
+              extractedData = mostRecentObject.content; // extract the content
+        this.editor.setValue(extractedData); // set the editor value to the extracted data
+      } else {
+        // if no local data
+        if (!localData) {
+          // set the value of the editor to the header
+          this.editor.setValue(header);
+          // set the cursor to line 15
+          this.editor.setCursor(14, 0);
+        }
+        // else, if there is local data 
+        else {
+          // set the value of the editor to the local data
+          this.editor.setValue(localData);
+        }
+      }
     });
-
+    // save the content of the editor on change
     this.editor.on('change', () => {
-      localStorage.setItem('content', this.editor.getValue());
+      // save the content to localStorage
+      localStorage.setItem('content', this.editor.getValue()); 
     });
-
-    // Save the content of the editor when the editor itself is loses focus
+    // save the content of the editor on blur
     this.editor.on('blur', () => {
+      // log the message
       console.log('The editor has lost focus');
-      putDb(localStorage.getItem('content'));
+      // save the content to the database
+      // todo: add putDb
     });
   }
 }
