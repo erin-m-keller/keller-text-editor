@@ -35,25 +35,18 @@ export default class {
       if (data && data.length > 0) {
         // initialize variables
         const mostRecentObject = data[data.length - 1], // get the most recent object
-              extractedData = mostRecentObject.content; // extract the content
-        this.editor.setValue(extractedData); // set the editor value to the extracted data
+              extractedData = mostRecentObject.content, // extract the content
+              content = this.prependHeader(extractedData);
+        this.editor.setValue(content); // set the editor value to the content data
         // set the cursor to line 15
         this.editor.setCursor(14, 0);
       } else {
-        // if no local data
-        if (!localData) {
-          // set the value of the editor to the header
-          this.editor.setValue(header);
-          // set the cursor to line 15
-          this.editor.setCursor(14, 0);
-        }
-        // else, if there is local data 
-        else {
-          // set the value of the editor to the local data
-          this.editor.setValue(localData);
-          // set the cursor to line 15
-          this.editor.setCursor(14, 0);
-        }
+        // initialize variables
+        const content = localData ? this.prependHeader(localData) : header;
+        // set the value of the editor to the content
+        this.editor.setValue(content);
+        // set the cursor to line 15
+        this.editor.setCursor(14, 0);
       }
     });
     // save the content of the editor on change
@@ -68,5 +61,17 @@ export default class {
       // save the content to the database
       putDb(localStorage.getItem('content')); 
     });
+  }
+  prependHeader(data) {
+    if (!data.startsWith(header)) {
+      return header + '\n' + data;
+    }
+    return data;
+  }
+  removeHeader(data) {
+    if (data.startsWith(header)) {
+      return data.replace(header + '\n', '');
+    }
+    return data;
   }
 }
