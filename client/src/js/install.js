@@ -1,11 +1,35 @@
-const butInstall = document.getElementById('buttonInstall');
+const installBtn = document.getElementById('buttonInstall');
+const openBtn = document.getElementById('buttonOpen');
+const textHeader = document.getElementById('textHeader');
 
-// Logic for installing the PWA
-// TODO: Add an event handler to the `beforeinstallprompt` event
-window.addEventListener('beforeinstallprompt', (event) => {});
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  installBtn.style.visibility = 'visible';
+  textHeader.textContent = 'Click the button to install!';
 
-// TODO: Implement a click event handler on the `butInstall` element
-butInstall.addEventListener('click', async () => {});
+  installBtn.addEventListener('click', () => {
+    event.prompt();
+    installBtn.setAttribute('disabled', true);
+    installBtn.textContent = 'Installed!';
+  });
+});
 
-// TODO: Add an handler for the `appinstalled` event
-window.addEventListener('appinstalled', (event) => {});
+window.addEventListener('appinstalled', (event) => {
+    textHeader.textContent = 'Application has been successfully installed! Click the launch icon on the right side of the URL address bar to open the app!';
+    installBtn.style.visibility = 'hidden';
+    console.log('👍', 'appinstalled', event);
+});
+
+// Detect if the PWA is installed using getInstalledRelatedApps()
+if (navigator.getInstalledRelatedApps) {
+    console.log("found pwa");
+    navigator.getInstalledRelatedApps().then((relatedApps) => {
+      console.log("relatedApps: " + JSON.stringify(relatedApps));
+      console.log("relatedApps.length: " + relatedApps.length);
+      if (relatedApps.length > 0) {
+        console.log("Set text to open");
+        // The PWA is installed
+        installBtn.textContent = 'Open';
+      }
+    });
+  }

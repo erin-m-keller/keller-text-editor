@@ -12,12 +12,12 @@ export default class {
       throw new Error('CodeMirror is not loaded');
     }
 
-    // Create a separate HTML element for the header
+    // create a separate HTML element for the header
     const headerElement = document.createElement('pre');
-    headerElement.textContent = header;
-    headerElement.className = "text-header";
-    headerElement.style.fontFamily = 'monospace';
-    document.querySelector('#main').before(headerElement);
+    headerElement.textContent = header; // set text
+    headerElement.className = "text-header"; // set class name
+    headerElement.style.fontFamily = 'monospace'; // set font style for ascii art
+    document.querySelector('#main').before(headerElement); // append to the container
 
     this.editor = CodeMirror(document.querySelector('#main'), {
       value: ' ', // set a non-empty default value (a space)

@@ -62,6 +62,12 @@ module.exports = () => {
             destination: path.join('src', 'images'),
           },
         ],
+        related_applications: [
+          {
+            platform: 'web',
+            url: 'https://example.com/your-app-url',
+          },
+        ],
       }),
       // injects a service worker into the output
       new InjectManifest({
