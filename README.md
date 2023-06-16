@@ -92,7 +92,7 @@
 
   ## Screenshot
 
-  // TODO: add screenshot
+  ![FinishedProduct](./client/src/images/finished-product.png)
   
   ## Deployed page
 

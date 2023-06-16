@@ -38,5 +38,11 @@
   "start_url": "/",
   "description": "Takes notes with JavaScript syntax highlighting!",
   "background_color": "#6A66A3",
-  "theme_color": "#6A66A3"
+  "theme_color": "#6A66A3",
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://example.com/your-app-url"
+    }
+  ]
 }
