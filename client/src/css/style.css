@@ -200,6 +200,10 @@ h1 {
   background-color: #31a9e1;
 }
 
+.text-header {
+  color: #77f;
+}
+
 @media only screen and (max-width: 600px) {
   .nav-btn {
     display: none;
