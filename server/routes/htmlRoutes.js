@@ -1,6 +1,13 @@
-const path = require('path');
+// initialize variables
+const path = require('path'); 
 
-module.exports = (app) =>
-  app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, '../../dist/index.html'))
-  );
+// define a function named 'serveHomePage' and export it
+module.exports = function serveHomePage(app) { 
+  // handle GET requests to the root URL ('/')
+  app.get('/', function(req, res) { 
+    // construct the file path to the 'index.html' file
+    const filePath = path.join(__dirname, '../../dist/index.html'); 
+    // send the 'index.html' file as the response
+    res.sendFile(filePath); 
+  });
+};
