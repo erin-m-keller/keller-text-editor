@@ -77,11 +77,6 @@
     npm i
   ```
 
-  * Build the application.
-  ``` node
-    npm run build
-  ```
-
   * Start the server in the terminal.
   ``` node
     npm start 
@@ -96,7 +91,7 @@
   
   ## Deployed page
 
-  // TODO: add application URL
+  [View Published Page](https://keller-text-editor-c96daa18d32b.herokuapp.com/)
 
 
   ## License 
